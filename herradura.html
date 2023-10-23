@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* Fonts */
+    * {
+        font-family: 'Messina Sans';
+
+    }
+
+    @font-face {
+        font-family: 'Messina Sans';
+        src: url('https://static.nmas.com.mx/fonts/MessinaSansWeb-Black.woff2') format('woff2');
+        font-weight: 900;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Messina Sans';
+        src: url('https://static.nmas.com.mx/fonts/MessinaSansWeb-Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    /* @font-face {
+	font-family: 'Messina Sans';
+	src: url('https://static.nmas.com.mx/fonts/MessinaSansWeb-Light.woff2')
+		format('woff2');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+} */
+
+    @font-face {
+        font-family: 'Messina Sans';
+        src: url('https://static.nmas.com.mx/fonts/MessinaSansWeb-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    body {
+        font-family: 'Messina Sans';
+    }
+</style>
+<style>
+    /* Buttons */
+    .wrapperButtons {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+
+    }
+
+    .button {
+        cursor: pointer;
+        background: rgb(231, 235, 243);
+        padding: 10px 20px;
+        border: none;
+        display: block;
+        border-radius: 8px;
+        max-width: 1440px;
+        color: #00283b;
+        transition: background .3s ease;
+    }
+
+    .button:hover {
+        background: #2b2d395b;
+    }
+
+    .wrapperTable {
+        display: flex;
+        justify-content: center;
+    }
+
+    .table {
+        text-align: left;
+    }
+</style>
+<style>
+    .table__title {
+        text-align: center;
+    }
+
+    .highcharts-credits {
+        display: none;
+    }
+
+    .highcharts-figure,
+    .highcharts-data-table table {
+        min-width: 320px;
+        max-width: 800px;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #ebebeb;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td,
+    .highcharts-data-table th,
+    .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr,
+    .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+
+    input[type="number"] {
+        min-width: 50px;
+    }
+
+    .horse__title {
+        text-align: center;
+    }
+</style>
+
+<body>
+    <figure class="highcharts-figure">
+        <h1 class="horse__title">Herradura</h1>
+        <div class="wrapperButtons">
+            <button id="partidos_button" value="partidos" class="button button__item-1">
+                Partidos
+            </button>
+            <button id="escolaridad_button" value="escolaridad" class="button button__item-2">
+                Escolaridad
+            </button>
+            <button id="signo_button" value="zodiacal" class="button button__item-3">
+                Signo Zodiacal
+            </button>
+        </div>
+        <div id="container"></div>
+        <div id="tableContent">
+            <h2 class="table__title">Titulo Tabla 1</h2>
+            <div class="wrapperTable">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Elemento 1</th>
+                            <th>Elemento 1</th>
+                            <th>Elemento 1</th>
+                            <th>Elemento 1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Elemento 1</td>
+                            <td>Elemento 1</td>
+                            <td>Elemento 1</td>
+                            <td>Elemento 1</td>
+                        </tr>
+                        <tr>
+
+                            <td>Elemento 1</td>
+                            <td>Elemento 1</td>
+                            <td>Elemento 1</td>
+                            <td>Elemento 1</td>
+
+                        </tr>
+                        <tr>
+                            <td>Elemento 1</td>
+                            <td>Elemento 1</td>
+                            <td>Elemento 1</td>
+                            <td>Elemento 1</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </figure>
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/item-series.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script>
+        // DATA 
+        const escolaridad = [
+
+            {
+                "name": "Doctorado",
+                "y": 26,
+                "color": "#4b6e80",
+                "label": "Doctorado"
+            },
+            {
+                "name": "Maestría",
+                "y": 152,
+                "color": "#5c7b8b",
+                "label": "Maestría"
+            },
+            {
+                "name": "Licenciatura",
+                "y": 243,
+                "color": "#6c8896",
+                "label": "Licenciatura"
+            },
+            {
+                "name": "Técnico",
+                "y": 8,
+                "color": "#7d94a1",
+                "label": "Técnico"
+            },
+            {
+                "name": "Pasante Lic.",
+                "y": 18,
+                "color": "#8da1ac",
+                "label": "Pasante Lic."
+            },
+            {
+                "name": "Preparatoria",
+                "y": 39,
+                "color": "#9eaeb6",
+                "label": "Preparatoria"
+            },
+            {
+                "name": "Secundaria",
+                "y": 4,
+                "color": "#aebbc1",
+                "label": "Secundaria"
+            },
+            {
+                "name": "Primaria",
+                "y": 1,
+                "color": "#bfc7cc",
+                "label": "Primaria"
+            },
+            {
+                "name": "Sin información",
+                "y": 9,
+                "color": "#cfd4d7",
+                "label": "Sin información"
+            }
+        ];
+        const partidos = [
+            {
+                name: "MORENA",
+                y: 198,
+                color: "#7e050e",
+                label: "MORENA",
+            },
+            {
+                name: "PT",
+                y: 37,
+                color: "#9b6965",
+                label: "PT",
+            },
+            {
+                name: "PVEM",
+                y: 43,
+                color: "#3db14f",
+                label: "PVEM",
+            },
+            {
+                name: "MC",
+                y: 23,
+                color: "#ef792f",
+                label: "MC",
+            },
+            {
+                name: "PRI",
+                y: 70,
+                color: "#de182b",
+                label: "PRI",
+            },
+            {
+                name: "PRD",
+                y: 15,
+                color: "#fdd738",
+                label: "PRD",
+            },
+            {
+                name: "PAN",
+                y: 114,
+                color: "#0951b3",
+                label: "PAN",
+            },
+        ];
+        const zodiacal = [
+            {
+                name: "Capricorn",
+                y: 48,
+                color: "#1d2a32",
+                label: "Capricorn",
+            },
+            {
+                name: "Aquarius",
+                y: 35,
+                color: "#293d54",
+                label: "Aquarius",
+            },
+            {
+                name: "Pisces",
+                y: 44,
+                color: "#36516f",
+                label: "Pisces",
+            },
+            {
+                name: "Aries",
+                y: 50,
+                color: "#6d5a79",
+                label: "Aries",
+            },
+            {
+                name: "Taurus",
+                y: 46,
+                color: "#906078",
+                label: "Taurus",
+            },
+            {
+                name: "Gemini",
+                y: 28,
+                color: "#b36577",
+                label: "Gemini",
+            },
+            {
+                name: "Cancer",
+                y: 41,
+                color: "#e26b71",
+                label: "Cancer",
+            },
+            {
+                name: "Leo",
+                y: 41,
+                color: "#e47c78",
+                label: "Leo",
+            },
+            {
+                name: "Virgo",
+                y: 41,
+                color: "#e68c7f",
+                label: "Virgo",
+            },
+            {
+                name: "Libra",
+                y: 42,
+                color: "#e8ad8d",
+                label: "Libra",
+            },
+            {
+                name: "Scorpio",
+                y: 38,
+                color: "#edbba2",
+                label: "Scorpio",
+            },
+            {
+                name: "Sagittarius",
+                y: 46,
+                color: "#ebe6c5",
+                label: "Sagittarius",
+            },
+        ];
+        const titles = {
+            partidos: {
+                title: {
+                    text: "Partidos",
+                },
+                subtitle: {
+                    text: "Partidos que encontrarás alrededor del 2018",
+                },
+            },
+            zodiacal: {
+                title: {
+                    text: "Signos zodiacales",
+                },
+                subtitle: {
+                    text: "Signos zodiacales en la LXV legislatura, Cámara de Diputados",
+                },
+            },
+            escolaridad: {
+                title: {
+                    text: "Escolaridad",
+                },
+                subtitle: {
+                    text: "Escolaridad alcanzada en los partidos 2018",
+                },
+            },
+        };
+        let horseShow = partidos;
+        let title = 'partidos'
+        let subtitle = 'partidos';
+    </script>
+    <script>
+        // Chart init
+        Highcharts.chart('container', {
+
+            chart: {
+                type: 'item'
+            },
+
+            title: {
+                text: titles[title]?.title.text
+            },
+
+            subtitle: {
+                text: titles[subtitle]?.subtitle?.text
+            },
+
+            legend: {
+                labelFormat: '{name} <span style="opacity: 0.4">{y}</span>'
+            },
+
+            series: [{
+                name: 'Total',
+                keys: ['name', 'y', 'color', 'label'],
+                data: horseShow,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.label}',
+                    style: {
+                        textOutline: '3px contrast'
+                    }
+                },
+
+                // Circular options
+                center: ['50%', '88%'],
+                size: '170%',
+                startAngle: -100,
+                endAngle: 100
+            }],
+
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 600
+                    },
+                    chartOptions: {
+                        series: [{
+                            dataLabels: {
+                                distance: -30
+                            }
+                        }]
+                    }
+                }]
+            }
+        });
+
+    </script>
+    <script>
+        const generateTable = number => `
+            <div id="tableContent">
+            <h2 class="table__title">Titulo Tabla ${number}</h2>
+            <div class="wrapperTable">
+                <table class="table">   
+                    <thead>
+                        <tr>
+                            <th>Elemento ${number}</th>
+                            <th>Elemento ${number}</th>
+                            <th>Elemento ${number}</th>
+                            <th>Elemento ${number}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Elemento ${number}</td>
+                            <td>Elemento ${number}</td>
+                            <td>Elemento ${number}</td>
+                            <td>Elemento ${number}</td>
+                        </tr>
+                        <tr>
+    
+                            <td>Elemento ${number}</td>
+                            <td>Elemento ${number}</td>
+                            <td>Elemento ${number}</td>
+                            <td>Elemento ${number}</td>
+    
+                        </tr>
+                        <tr>
+                            <td>Elemento ${number}</td>
+                            <td>Elemento ${number}</td>
+                            <td>Elemento ${number}</td>
+                            <td>Elemento ${number}</td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        `;
+
+
+        document.querySelectorAll('.button').forEach((element)=>{
+            console.log(element,'tenemos el elemento');
+        })
+        // Event
+        document.querySelector(`#partidos_button`).addEventListener('click', (e) => {
+            horseShow = partidos;
+            const typeOfElement = e.target.value.trim().toLowerCase();
+            title = typeOfElement;
+            subtitle = typeOfElement;
+            updateChart();
+            document.querySelector('#tableContent').innerHTML = generateTable(1);
+        })
+        document.querySelector(`#signo_button`).addEventListener('click', (e) => {
+            const typeOfElement = e.target.value.trim().toLowerCase();
+            horseShow = zodiacal;
+            title = typeOfElement;
+            subtitle = typeOfElement;
+            updateChart();
+            document.querySelector('#tableContent').innerHTML = generateTable(3);
+        })
+        document.querySelector(`#escolaridad_button`).addEventListener('click', (e) => {
+            const typeOfElement = e.target.value.trim().toLowerCase();
+            horseShow = escolaridad;
+            title = typeOfElement;
+            subtitle = typeOfElement;
+            updateChart();
+            document.querySelector('#tableContent').innerHTML = generateTable(2);
+        })
+        function updateChart() {
+            const chart = Highcharts.charts[0]; // Obtiene la instancia de la gráfica
+            if (chart) {
+                chart.update({
+                    series: [{
+                        data: horseShow,
+                    }],
+                    title: {
+                        text: titles[title]?.title.text
+                    },
+
+                    subtitle: {
+                        text: titles[subtitle]?.subtitle?.text
+                    },
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
